@@ -1,0 +1,28 @@
+{
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2023-05-21T10:59:48.000Z"
+    }
+  },
+  "auth": {
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "nextAuthRolesAuth",
+          "attributes": ["UserPoolId", "AppClientIDWeb", "AppClientID", "IdentityPoolId"]
+        }
+      ]
+    },
+    "nextAuthRolesAuth": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
