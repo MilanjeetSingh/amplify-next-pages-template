@@ -4,16 +4,14 @@ import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import type { Schema } from '@/amplify/data/resource';
 import ClientTodos from './client-todos';
-import outputs from '@/amplify_outputs.json';
-
 // Define the proper configuration for server-side
 const serverConfig = {
   API: {
     GraphQL: {
-      endpoint: outputs.api.ApiName.GraphQL.endpoint,
-      region: outputs.api.ApiName.GraphQL.region,
+      endpoint: "https://example-graphql-endpoint.appsync-api.region.amazonaws.com/graphql",
+      region: "us-east-1",
       defaultAuthMode: "apiKey",
-      apiKey: outputs.api.ApiName.GraphQL.apiKey
+      apiKey: "YOUR_API_KEY"
     }
   }
 };

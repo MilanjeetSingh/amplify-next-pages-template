@@ -4,18 +4,11 @@ import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import { Amplify } from "aws-amplify";
 import type { Schema } from "@/amplify/data/resource";
-import outputs from "@/amplify_outputs.json";
 
-// Configure Amplify with specific GraphQL API settings
+// Configure Amplify with inline configuration
 Amplify.configure({
-  API: {
-    GraphQL: {
-      endpoint: outputs.api.ApiName.GraphQL.endpoint,
-      region: outputs.api.ApiName.GraphQL.region,
-      defaultAuthMode: "apiKey",
-      apiKey: outputs.api.ApiName.GraphQL.apiKey
-    }
-  }
+  // Just use the client-side data API without specific GraphQL settings
+  // This should work with the default configuration from the Amplify backend
 });
 
 // Generate a client for client-side operations
