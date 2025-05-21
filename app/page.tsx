@@ -6,16 +6,42 @@ import { Amplify } from "aws-amplify";
 import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import outputs from "@/amplify_outputs.json";
+
+// Define type for outputs to avoid TypeScript errors
+interface AmplifyOutputs {
+  auth: {
+    Cognito: {
+      userPoolId: string;
+      userPoolClientId: string;
+      identityPoolId: string;
+    }
+  };
+  api: {
+    ApiName: {
+      GraphQL: {
+        endpoint: string;
+        region: string;
+        apiKey: string;
+        defaultAuthMode: string;
+      }
+    }
+  };
+  storage: Record<string, unknown>;
+  analytics: Record<string, unknown>;
+}
+
+// Cast outputs to the defined type
+const typedOutputs = outputs as AmplifyOutputs;
 import "@aws-amplify/ui-react/styles.css";
 
 // Configure Amplify with specific GraphQL API settings
 Amplify.configure({
   API: {
     GraphQL: {
-      endpoint: outputs.api.ApiName.GraphQL.endpoint,
-      region: outputs.api.ApiName.GraphQL.region,
+      endpoint: typedOutputs.api.ApiName.GraphQL.endpoint,
+      region: typedOutputs.api.ApiName.GraphQL.region,
       defaultAuthMode: "apiKey",
-      apiKey: outputs.api.ApiName.GraphQL.apiKey
+      apiKey: typedOutputs.api.ApiName.GraphQL.apiKey
     }
   }
 });
